@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>BTO Calculator</title>
+  </head>
+  
+  <body>
+    <h1> HDB Calculator</h1>
+    
+    <form id="hdb-form">
+      <label for="budget">Enter your budget:</label>
+      <input type="number" id="budget" name="budget" placeholder="e.g. 600000" />
+
+      <fieldset>
+        <label for="scheme-select">Select your downpayment scheme:</label>
+        <select name="scheme" id="scheme-select">
+           <option value="" disabled selected>Choose a scheme</option>
+           <option value="staggered">Staggered Downpayment Scheme</option>
+        </select>
+
+        <label for="EHG-select">Select your EHG grant</label>
+        <select name="EHG" id="EHG-select">
+          <option value="" disabled selected>Choose your grant</option>
+          <option value="120k">$120,000</option>
+          <option value="110k">$110,000</option>
+          <option value="105k">$105,000</option>
+          <option value="95k">$95,000</option>
+          <option value="90k">$90,000</option>
+          <option value="80k">$80,000</option>
+          <option value="70k">$70,000</option>
+          <option value="65k">$65,000</option>
+          <option value="55k">$55,000</option>
+          <option value="50k">$50,000</option>
+          <option value="40k">$40,000</option>
+          <option value="30k">$30,000</option>
+          <option value="25k">$25,000</option>
+          <option value="20k">$20,000</option>
+          <option value="10k">$10,000</option>
+          <option value="5k">$5,000</option>
+        </select>
+       
+        <button type="submit">Calculate!</button>
+      </fieldset>
+    </form>
+    
+    <section>
+      <h2>Cost Breakdown</h2>
+      <h3>During signing of lease</h3> 
+      <ul>
+        <li>5% Downpayment: $<span id="5downpay">0</span></li>
+        <li>Buyer's Stamp Duty: $<span id="BSD">0</span></li>
+        <li>Conveyancing Fee: $<span id="leaseConveyance">0</span></li>
+      </ul>
+
+      <h3>During collection of keys</h3> 
+      <ul>
+        <li>Conveyancing Fee: $<span id="keysConveyance">0</span></li>
+        <li>Survey Fee: $<span id="survey">0</span></li>
+        <li>Home Protection Scheme: $<span id="homeProtect">0</span></li>
+        <li>Fire Insurance: $<span id="fireInsurance">0</span></li>
+        <li>20% Downpayment: $<span id="20downpay">0</span></li>
+      </ul>
+
+      <h3>Total Cost</h3>
+      <ul>
+        <li>Total cost during signing of lease: $<span id="totalSign">0</span></li>
+        <li>Total cost during collection of keys: $<span id="totalKeys">0</span></li>
+        <li><strong>Total: $<span id="totalCost">0</span></strong></li>
+      </ul>
+
+    </section>
+    <script src='script.js'></script>
+  </body>
+</html>
