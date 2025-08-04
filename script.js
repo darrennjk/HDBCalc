@@ -1,6 +1,7 @@
 const budgetInput = document.getElementById('budget');
 const form = document.getElementById('hdb-form');
 const flatType = document.getElementById('flatType');
+const ehg = document.getElementById('EHG-select');
 let total = 0;
 
 function handleFormSubmit(event) {
@@ -10,7 +11,7 @@ function handleFormSubmit(event) {
 
     const leaseSum = updateLease(budget);
     const keysSum = updateKeys(budget);
-    updateTotal(leaseSum, keysSum)
+    updateTotal(leaseSum, keysSum, ehg)
 
 }
 
@@ -141,9 +142,26 @@ function updateKeys(budget) {
     return keysSum;
 }
 
-function updateTotal(leaseSum, keysSum) {
-    total = leaseSum + keysSum;
+function updateTotal(leaseSum, keysSum, ehg) {
+    const total = leaseSum + keysSum;
     updateText('totalCost', total);
+
+    if (ehg.value && parseFloat(ehg.value) > 0) {
+        const grant = parseFloat(ehg.value);
+        const afterGrant = total - grant;
+
+        // Check if li arleady exists to prevent duplication
+        let existing = document.getElementById("afterGrant");
+        if (existing) { existing.remove() };
+
+        // Create new list item
+        let finalTotal = document.createElement("li");
+        finalTotal.innerHTML = `<strong>Total cost after grant is: $${afterGrant}</strong>`;
+
+        // Append to list
+        let cost = document.getElementById("totalList");
+        cost.appendChild(finalTotal);
+    }
     return total;
 }
 
