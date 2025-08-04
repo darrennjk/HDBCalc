@@ -15,7 +15,7 @@ function handleFormSubmit(event) {
 
 }
 
-
+// Handles Nan or less than 0 budgets
 function handleInvalidInput(budget) {
     if (isNaN(budget) || budget <= 0) {
         alert("Please enter a valid budget.");
@@ -23,18 +23,21 @@ function handleInvalidInput(budget) {
     }
 }
 
+// Updates 5% downpayment value
 function update5Downpay(budget) {
     let downpay = (budget * 0.05);
     updateText('5downpay', downpay);
     return downpay;
 }
 
+// Updates 20% downpayment value
 function update20DownPay(budget) {
     let downpay = (budget * 0.20);
     updateText('20downpay', downpay);
     return downpay;
 }
 
+// Updates Buyer's Stamp Duty value
 function updateBSD(budget) {
     let bsd = 0;
     let remaining = budget;
@@ -58,6 +61,7 @@ function updateBSD(budget) {
     return bsd;
 }
 
+// Updates conveyance fee value
 function updateConveyance(budget) {
     let conveyance = 0;
     let remaining = budget;
@@ -80,11 +84,11 @@ function updateConveyance(budget) {
     conveyance = conveyance * 1.09; // Add 9% GST
     if (conveyance < 21.60) { conveyance = 21.60 } // Set minimum coneyance fee
 
-    // updateTotal(Math.round(conveyance));
     updateText("leaseConveyance", Math.round(conveyance));
     return Math.round(conveyance);
 }
 
+// Updates survey fee value
 function updateSurvey() {
     const tiers = [
         { type: "1-room", fee: 163.5 },
@@ -103,6 +107,7 @@ function updateSurvey() {
     }
 }
 
+// Updates fire insurance fee value
 function updateFire() {
     const tiers = [
         { type: "1-room", fee: 1.11 },
@@ -121,6 +126,7 @@ function updateFire() {
     }
 }
 
+// Update cost for signing of lease
 function updateLease(budget) {
     downpay5 = update5Downpay(budget);
     bsd = updateBSD(budget);
@@ -130,6 +136,7 @@ function updateLease(budget) {
     return leaseSum;
 }
 
+// Update cost during collection of keys
 function updateKeys(budget) {
     survey = updateSurvey();
     const leaseReg = document.getElementById('leaseReg');
@@ -142,6 +149,7 @@ function updateKeys(budget) {
     return keysSum;
 }
 
+// Update total cost
 function updateTotal(leaseSum, keysSum, ehg) {
     const total = leaseSum + keysSum;
     updateText('totalCost', total);
@@ -165,6 +173,7 @@ function updateTotal(leaseSum, keysSum, ehg) {
     return total;
 }
 
+// Helper function for updating HTML values
 function updateText(id, value) {
     document.getElementById(id).textContent = value.toFixed(2);
 }
