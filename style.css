@@ -1,0 +1,54 @@
+:root {
+    --green: #057573;
+    --border: #E4EAE8;
+    --boxBG: #FEFEFE;
+    --shadow: 1px 2px 8px #888888;
+    background: #F4F6F5;
+    font-family: "Roboto";
+    font-weight: 600;
+    color: #4D4D4D;
+}
+
+.cost-breakdown {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+    "duringSigning duringCollection"
+    "totalCost totalCost";
+    gap: 1rem;
+}
+
+.duringSigning{
+    background: var(--boxBG);
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    grid-area: duringSigning;
+}
+
+.duringCollection{
+    background: var(--boxBG);
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    grid-area: duringCollection;
+}
+
+.totalCost{
+    background: var(--boxBG);
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    grid-area: totalCost;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    text-align: center;
+    color: var(--green);
+}
