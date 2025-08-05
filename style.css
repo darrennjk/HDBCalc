@@ -27,6 +27,13 @@
     grid-area: duringSigning;
 }
 
+.duringSigning ul li {
+    display: flex;
+    justify-content: space-between;
+    max-width: 350px;
+    margin-bottom: 1rem;
+}
+
 .duringCollection{
     background: var(--boxBG);
     box-shadow: var(--shadow);
@@ -34,6 +41,13 @@
     border: 2px solid var(--border);
     border-radius: 10px;
     grid-area: duringCollection;
+}
+
+.duringCollection ul li {
+    display: flex;
+    justify-content: space-between;
+    max-width: 350px;
+    margin-bottom: 1rem;
 }
 
 .totalCost{
@@ -44,6 +58,15 @@
     border-radius: 10px;
     grid-area: totalCost;
 }
+
+.totalCost ul li {
+    display: flex;
+    justify-content: space-between;
+    max-width: 100px;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
 
 h1,
 h2,
