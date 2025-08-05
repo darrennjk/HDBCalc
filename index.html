@@ -4,11 +4,14 @@
 <head>
     <meta charset="utf-8" />
     <title>BTO Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-    <h1> HDB Calculator</h1>
-    <div><i>* All calculations are on the assumption that you are using HDB for purchase + loan</i></div>
+    <h1 class:"title"> HDB CALCULATOR</h1>
+    <div class="hint"><i>* All calculations are on the assumption that you are using HDB for purchase + loan</i></div>
     <form id="hdb-form">
         <label for="budget">Enter your budget:</label>
         <input type="number" id="budget" name="budget" placeholder="e.g. 600000" />
@@ -57,37 +60,45 @@
         </fieldset>
     </form>
 
-    <section>
-        <h2>Cost Breakdown</h2>
-        <h3>During signing of lease: $<span id="leaseSum">0</span></h3>
-        <ul>
-            <li>5% Downpayment: $<span id="5downpay">0</span></li>
-            <li>Buyer's Stamp Duty: $<span id="BSD">0</span></li>
-            <li><a href="https://services2.hdb.gov.sg/webapp/BB14LFEESENQ/BB14PBuyingFlat.jsp">Conveyancing Fee:</a>
-                $<span id="leaseConveyance">0</span>
-            </li>
-        </ul>
 
-        <h3>During collection of keys: $<span id="keysSum">0</span></h3>
-        <ul>
-            <!-- <li>Conveyancing Fee: $<span id="keysConveyance">0</span></li> -->
-            <li>Survey Fee: $<span id="survey">0</span></li>
-            <li>Registration Fees:
-                <ul>
-                    <li>Lease In-Escrow Registration Fee: $<span id="leaseReg">38.30</span></li>
-                    <li>Mortgage In-Escrow Registration Fee: $<span id="mortgageReg">38.30</span></li>
-                </ul>
-            </li>
-            <!-- <li>Home Protection Scheme: $<span id="homeProtect">0</span></li> -->
-            <!-- Depends on age, gender, loan type, oustanding loan -->
-            <li>Fire Insurance: $<span id="fireInsurance">0</span></li>
-            <li>20% Downpayment: $<span id="20downpay">0</span></li>
-        </ul>
+    <h2>Cost Breakdown</h2>
+    <section class="cost-breakdown">
 
-        <h3>Total Cost</h3>
-        <ul id="totalList">
-            <li><strong>Total: $<span id="totalCost">0</span></strong></li>
-        </ul>
+        <section class="duringSigning">
+            <h3>During signing of lease: $<span id="leaseSum">0</span></h3>
+            <ul>
+                <li>5% Downpayment: $<span id="5downpay">0</span></li>
+                <li>Buyer's Stamp Duty: $<span id="BSD">0</span></li>
+                <li><a href="https://services2.hdb.gov.sg/webapp/BB14LFEESENQ/BB14PBuyingFlat.jsp">Conveyancing Fee:</a>
+                    $<span id="leaseConveyance">0</span>
+                </li>
+            </ul>
+        </section>
+
+        <section class="duringCollection">
+            <h3>During collection of keys: $<span id="keysSum">0</span></h3>
+            <ul>
+                <!-- <li>Conveyancing Fee: $<span id="keysConveyance">0</span></li> -->
+                <li>Survey Fee: $<span id="survey">0</span></li>
+                <li>Registration Fees:
+                    <ul>
+                        <li>Lease In-Escrow Registration Fee: $<span id="leaseReg">38.30</span></li>
+                        <li>Mortgage In-Escrow Registration Fee: $<span id="mortgageReg">38.30</span></li>
+                    </ul>
+                </li>
+                <!-- <li>Home Protection Scheme: $<span id="homeProtect">0</span></li> -->
+                <!-- Depends on age, gender, loan type, oustanding loan -->
+                <li>Fire Insurance: $<span id="fireInsurance">0</span></li>
+                <li>20% Downpayment: $<span id="20downpay">0</span></li>
+            </ul>
+        </section>
+
+        <section class="totalCost">
+            <h3>Total Cost</h3>
+            <ul id="totalList">
+                <li><strong>Total: $<span id="totalCost">0</span></strong></li>
+            </ul>
+        </section>
 
     </section>
     <script src='script.js'></script>
