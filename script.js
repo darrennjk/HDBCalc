@@ -164,7 +164,10 @@ function updateTotal(leaseSum, keysSum, ehg) {
 
         // Create new list item
         let finalTotal = document.createElement("li");
-        finalTotal.innerHTML = `<strong>Total cost after grant is: $${afterGrant}</strong>`;
+        finalTotal.innerHTML = `
+            <div>Total cost after grant is:</div> 
+            <div class="amount">$${afterGrant}</div>
+            `;
 
         // Append to list
         let cost = document.getElementById("totalList");

@@ -9,6 +9,51 @@
     color: #4D4D4D;
 }
 
+select {
+    margin-top: 1%;
+}
+
+fieldset{
+    background: var(--boxBG);
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    margin-top: 1rem;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+}
+
+/* CSS */
+.button {
+  background-color: var(--green);
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  margin-top: 1%;
+  outline: none;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button:hover,
+.button:focus {
+  background-color: #F082AC;
+}
 .cost-breakdown {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -60,12 +105,12 @@
 }
 
 .totalCost ul li {
-    display: flex;
-    justify-content: space-between;
-    max-width: 100px;
+    display: block;
     margin-bottom: 1rem;
     font-weight: bold;
 }
+
+
 
 
 h1,
