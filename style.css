@@ -52,7 +52,7 @@ fieldset{
 
 .button:hover,
 .button:focus {
-  background-color: #F082AC;
+  background-color: #08ACAA;
 }
 .cost-breakdown {
     display: grid;

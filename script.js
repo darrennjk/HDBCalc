@@ -154,19 +154,21 @@ function updateTotal(leaseSum, keysSum, ehg) {
     const total = leaseSum + keysSum;
     updateText('totalCost', total);
 
+    // Check if li arleady exists to prevent duplication
+    let existing = document.getElementById("afterGrant");
+    if (existing) { existing.remove() };
+
     if (ehg.value && parseFloat(ehg.value) > 0) {
         const grant = parseFloat(ehg.value);
         const afterGrant = total - grant;
 
-        // Check if li arleady exists to prevent duplication
-        let existing = document.getElementById("afterGrant");
-        if (existing) { existing.remove() };
-
         // Create new list item
         let finalTotal = document.createElement("li");
         finalTotal.innerHTML = `
-            <div>Total cost after grant is:</div> 
-            <div class="amount">$${afterGrant}</div>
+            <div id="afterGrant">
+                <div>Total cost after grant is:</div> 
+                <div class="amount">$${afterGrant}</div>
+            </div>
             `;
 
         // Append to list
