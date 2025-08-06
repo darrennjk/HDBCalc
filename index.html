@@ -1,5 +1,5 @@
-<!-- TODO: Add other downpayment schemes -->
 <!-- TODO: Add sources/calculation links -->
+<!-- TODO: Add recommended savings per month -->
 <!doctype html>
 <html lang="en-US">
 
@@ -20,6 +20,7 @@
 
         <fieldset>
             <label for="scheme-select">Select your downpayment scheme:</label>
+            <!-- TODO: Add other downpayment schemes -->
             <select name="scheme" id="scheme-select">
                 <option value="" disabled selected>Choose a scheme</option>
                 <option value="staggered">Staggered Downpayment Scheme</option>
@@ -62,70 +63,71 @@
         </fieldset>
     </form>
 
+    <section class="outer-cost-breakdown">
+        <h2 class="costHeader">Cost Breakdown</h2>
+        <section class="inner-cost-breakdown">
+            <section class="duringSigning">
+                <h3>During signing of lease: $<span id="leaseSum">0</span></h3>
+                <ul>
+                    <li>
+                        5% Downpayment:
+                        <span class="amount">$<span id="5downpay">0</span></span>
+                    </li>
 
-    <h2>Cost Breakdown</h2>
-    <section class="cost-breakdown">
+                    <li>
+                        Buyer's Stamp Duty:
+                        <span class="amount">$<span id="BSD">0</span></span>
+                    </li>
 
-        <section class="duringSigning">
-            <h3>During signing of lease: $<span id="leaseSum">0</span></h3>
-            <ul>
-                <li>
-                    5% Downpayment:
-                    <span class="amount">$<span id="5downpay">0</span></span>
-                </li>
+                    <li>
+                        <a href="https://services2.hdb.gov.sg/webapp/BB14LFEESENQ/BB14PBuyingFlat.jsp">Conveyancing
+                            Fee:</a>
+                        <span class="amount">$<span id="leaseConveyance">0</span></span>
+                    </li>
+                </ul>
+            </section>
 
-                <li>
-                    Buyer's Stamp Duty:
-                    <span class="amount">$<span id="BSD">0</span></span>
-                </li>
+            <section class="duringCollection">
+                <h3>During collection of keys: $<span id="keysSum">0</span></h3>
+                <ul>
+                    <!-- <li>Conveyancing Fee: $<span id="keysConveyance">0</span></li> -->
+                    <li>
+                        Survey Fee:
+                        <span>$<span id="survey">0</span></span>
+                    </li>
+                    <li>
+                        Lease In-Escrow Registration Fee:
+                        <span class="amount">$<span id="leaseReg">38.30</span></span>
+                    </li>
 
-                <li>
-                    <a href="https://services2.hdb.gov.sg/webapp/BB14LFEESENQ/BB14PBuyingFlat.jsp">Conveyancing Fee:</a>
-                    <span class="amount">$<span id="leaseConveyance">0</span></span>
-                </li>
-            </ul>
+                    <li>
+                        Mortgage In-Escrow Registration Fee:
+                        <span class="amount">$<span id="mortgageReg">38.30</span></span>
+                    </li>
+                    <!-- <li>Home Protection Scheme: $<span id="homeProtect">0</span></li> -->
+                    <!-- Depends on age, gender, loan type, oustanding loan -->
+                    <li>
+                        Fire Insurance:
+                        <span class="amount">$<span id="fireInsurance">0</span></span>
+                    </li>
+                    <li>
+                        20% Downpayment:
+                        <span class="amount">$<span id="20downpay">0</span></span>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="totalCost">
+                <h3>Total Cost</h3>
+                <ul id="totalList">
+                    <li>
+                        <div>Total downpayment:</div>
+                        <div>$<span id="totalCost">0</span></div>
+                    </li>
+                </ul>
+            </section>
+
         </section>
-
-        <section class="duringCollection">
-            <h3>During collection of keys: $<span id="keysSum">0</span></h3>
-            <ul>
-                <!-- <li>Conveyancing Fee: $<span id="keysConveyance">0</span></li> -->
-                <li>
-                    Survey Fee:
-                    <span>$<span id="survey">0</span></span>
-                </li>
-                <li>
-                    Lease In-Escrow Registration Fee:
-                    <span class="amount">$<span id="leaseReg">38.30</span></span>
-                </li>
-
-                <li>
-                    Mortgage In-Escrow Registration Fee:
-                    <span class="amount">$<span id="mortgageReg">38.30</span></span>
-                </li>
-                <!-- <li>Home Protection Scheme: $<span id="homeProtect">0</span></li> -->
-                <!-- Depends on age, gender, loan type, oustanding loan -->
-                <li>
-                    Fire Insurance:
-                    <span class="amount">$<span id="fireInsurance">0</span></span>
-                </li>
-                <li>
-                    20% Downpayment:
-                    <span class="amount">$<span id="20downpay">0</span></span>
-                </li>
-            </ul>
-        </section>
-
-        <section class="totalCost">
-            <h3>Total Cost</h3>
-            <ul id="totalList">
-                <li>
-                    <div>Total:</div>
-                    <div>$<span id="totalCost">0</span></div>
-                </li>
-            </ul>
-        </section>
-
     </section>
     <script src='script.js'></script>
 </body>

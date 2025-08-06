@@ -8,6 +8,8 @@ function handleFormSubmit(event) {
     event.preventDefault();
     const budget = parseFloat(budgetInput.value);
     handleInvalidInput(budget);
+    const outerCostBreakdown = document.querySelector('.outer-cost-breakdown');
+    outerCostBreakdown.style.display = 'grid';
 
     const leaseSum = updateLease(budget);
     const keysSum = updateKeys(budget);

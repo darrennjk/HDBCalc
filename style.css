@@ -54,13 +54,18 @@ fieldset{
 .button:focus {
   background-color: #08ACAA;
 }
-.cost-breakdown {
+
+.inner-cost-breakdown {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
     "duringSigning duringCollection"
     "totalCost totalCost";
     gap: 1rem;
+}
+
+.outer-cost-breakdown {
+    display: none;
 }
 
 .duringSigning{
