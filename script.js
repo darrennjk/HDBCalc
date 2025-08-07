@@ -12,6 +12,7 @@ function handleFormSubmit(event) {
     const outerCostBreakdown = document.querySelector('.outer-cost-breakdown');
     outerCostBreakdown.style.display = 'grid';
 
+    set_BSD(budget);
     return;
     const leaseSum = updateLease(budget);
     const keysSum = updateKeys(budget);
@@ -44,7 +45,6 @@ function handleScheme(budget) {
             set_leaseDownpayment_value(budget, scheme.lease);
             set_collectionDownpayment(scheme.keys);
             set_keysDownpayment_value(budget, scheme.keys);
-            // lease_value = parseInt(scheme.lease);
         }
     }
 }
@@ -63,29 +63,6 @@ function update20DownPay(budget) {
     return downpay;
 }
 
-// Updates Buyer's Stamp Duty value
-function updateBSD(budget) {
-    let bsd = 0;
-    let remaining = budget;
-
-    const tiers = [
-        { limit: 180000, rate: 0.01 },
-        { limit: 180000, rate: 0.02 },
-        { limit: 640000, rate: 0.03 },
-        { limit: 5000000, rate: 0.04 },
-        { limit: 15000000, rate: 0.05 },
-        { limit: Infinity, rate: 0.06 },
-    ];
-    for (const tier of tiers) {
-        const taxable = Math.min(tier.limit, remaining);
-        bsd += taxable * tier.rate;
-        remaining -= taxable;
-        if (remaining <= 0) break;
-    }
-
-    updateText('BSD', bsd);
-    return bsd;
-}
 
 // Updates conveyance fee value
 function updateConveyance(budget) {
@@ -155,6 +132,7 @@ function updateFire() {
 // Update cost for signing of lease
 function updateLease(budget) {
     // downpay5 = update5Downpay(budget);
+    const leaseDownpayment = get_leaseDownpayment_value();
     bsd = updateBSD(budget);
     conveyance = updateConveyance(budget);
     let leaseSum = downpay5 + bsd + conveyance;
@@ -162,7 +140,7 @@ function updateLease(budget) {
     return leaseSum;
 }
 
-// Update cost during collection of keys
+// Update cost/ during collection of keys
 function updateKeys(budget) {
     survey = updateSurvey();
     const leaseReg = document.getElementById('leaseReg');
@@ -234,10 +212,52 @@ function set_keysDownpayment_value(budget_string, keysValue_string) {
     keysDownpayment_value.textContent = new_total;
 }
 
+// Set Buyer's Stamp Duty value
+function set_BSD(budget) {
+    let bsd = 0;
+    let remaining = budget;
+
+    const tiers = [
+        { limit: 180000, rate: 0.01 },
+        { limit: 180000, rate: 0.02 },
+        { limit: 640000, rate: 0.03 },
+        { limit: 5000000, rate: 0.04 },
+        { limit: 15000000, rate: 0.05 },
+        { limit: Infinity, rate: 0.06 },
+    ];
+    for (const tier of tiers) {
+        const taxable = Math.min(tier.limit, remaining);
+        bsd += taxable * tier.rate;
+        remaining -= taxable;
+        if (remaining <= 0) break;
+    }
+    
+    console.log(budget);
+    console.log(bsd.toString());
+    bsd_element = document.querySelector('.duringSigning #BSD');
+    bsd_element.textContent = bsd.toString();
+    return;
+}
+
 // Getters for scheme type
 function get_scheme() {
     const schemeType = document.getElementById("scheme-select");
     return schemeType.value
+}
+
+function get_leaseDownpayment_value() {
+    const leaseDownpayment_value = document.querySelector('.duringSigning #leaseDownpayment_value');
+    return parseFloat(leaseDownpayment_value.value);
+}
+
+function get_keysDownpayment_value() {
+    const keysDownpayment_value = document.querySelector('.duringCollection #keysDownpayment_value');
+    return parseFloat(keysDownpayment_value.value);
+}
+
+function get_BSD() {
+    const bsd = document.querySelector('.duringSigning #BSD');
+    return parseFloat(bsd.value);
 }
 
 // Helper function for updating HTML values
