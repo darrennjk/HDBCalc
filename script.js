@@ -8,9 +8,11 @@ function handleFormSubmit(event) {
     event.preventDefault();
     const budget = parseFloat(budgetInput.value);
     handleInvalidInput(budget);
+    handleScheme(budgetInput.value);
     const outerCostBreakdown = document.querySelector('.outer-cost-breakdown');
     outerCostBreakdown.style.display = 'grid';
 
+    return;
     const leaseSum = updateLease(budget);
     const keysSum = updateKeys(budget);
     updateTotal(leaseSum, keysSum, ehg)
@@ -22,6 +24,28 @@ function handleInvalidInput(budget) {
     if (isNaN(budget) || budget <= 0) {
         alert("Please enter a valid budget.");
         return;
+    }
+}
+
+// Handle scheme type
+function handleScheme(budget) {
+    const types = [
+        { schemeType: "", lease: "5%", keys: "20%"}, // Default value
+        { schemeType: "staggered", lease: "5%", keys: "20%"},
+        { schemeType: "staggeredDiffered", lease: "2.5%", keys: "22.5%"},
+        { schemeType: "standard", lease: "10%", keys: "15%"},
+    ];
+
+    const current_scheme = get_scheme();
+
+    for (const scheme of types) {
+        if (scheme.schemeType == current_scheme) {
+            set_leaseDownpayment(scheme.lease);
+            set_leaseDownpayment_value(budget, scheme.lease);
+            set_collectionDownpayment(scheme.keys);
+            set_keysDownpayment_value(budget, scheme.keys);
+            // lease_value = parseInt(scheme.lease);
+        }
     }
 }
 
@@ -130,7 +154,7 @@ function updateFire() {
 
 // Update cost for signing of lease
 function updateLease(budget) {
-    downpay5 = update5Downpay(budget);
+    // downpay5 = update5Downpay(budget);
     bsd = updateBSD(budget);
     conveyance = updateConveyance(budget);
     let leaseSum = downpay5 + bsd + conveyance;
@@ -178,6 +202,42 @@ function updateTotal(leaseSum, keysSum, ehg) {
         cost.appendChild(finalTotal);
     }
     return total;
+}
+
+// Setters
+function set_leaseDownpayment(leasePercentage) {
+    const leasePercent = document.querySelector('.duringSigning #leasePercent');
+    leasePercent.textContent = leasePercentage;
+}
+
+function set_collectionDownpayment(keysPercentage) {
+    const leasePercent = document.querySelector('.duringCollection #keysPercent');
+    keysPercent.textContent = keysPercentage;
+}
+
+function set_leaseDownpayment_value(budget_string, leaseValue_string) {
+    const leaseValue = parseFloat(leaseValue_string);
+    const budgetValue = parseFloat(budget_string);
+    let new_total = budgetValue * (leaseValue/100);
+    new_total = new_total.toString();
+    const leaseDownpayment_value = document.querySelector('.duringSigning #leaseDownpayment_value');
+    leaseDownpayment_value.textContent = new_total;
+
+}
+
+function set_keysDownpayment_value(budget_string, keysValue_string) {
+    const keysValue = parseFloat(keysValue_string);
+    const budgetValue = parseFloat(budget_string);
+    let new_total = budgetValue * (keysValue/100);
+    new_total = new_total.toString();
+    const keysDownpayment_value = document.querySelector('.duringCollection #keysDownpayment_value');
+    keysDownpayment_value.textContent = new_total;
+}
+
+// Getters for scheme type
+function get_scheme() {
+    const schemeType = document.getElementById("scheme-select");
+    return schemeType.value
 }
 
 // Helper function for updating HTML values

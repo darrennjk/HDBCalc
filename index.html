@@ -23,7 +23,9 @@
             <!-- TODO: Add other downpayment schemes -->
             <select name="scheme" id="scheme-select">
                 <option value="" disabled selected>Choose a scheme</option>
+                <option value="standard">Standard Downpayment Scheme</option>
                 <option value="staggered">Staggered Downpayment Scheme</option>
+                <option value="staggeredDiffered">Staggered Differed Downpayment Scheme</option>
             </select>
             <br />
             <label for="EHG-select">Select your EHG grant:</label>
@@ -70,8 +72,8 @@
                 <h3>During signing of lease: $<span id="leaseSum">0</span></h3>
                 <ul>
                     <li>
-                        5% Downpayment:
-                        <span class="amount">$<span id="5downpay">0</span></span>
+                        <div id="leaseDownpayment"><span id="leasePercent">5%</span> Downpayment:</div>
+                        <span class="amount">$<span id="leaseDownpayment_value">0</span></span>
                     </li>
 
                     <li>
@@ -111,8 +113,8 @@
                         <span class="amount">$<span id="fireInsurance">0</span></span>
                     </li>
                     <li>
-                        20% Downpayment:
-                        <span class="amount">$<span id="20downpay">0</span></span>
+                        <div><span id="keysPercent">20%</span> Downpayment:</div>
+                        <span class="amount">$<span id="keysDownpayment_value">0</span></span>
                     </li>
                 </ul>
             </section>
