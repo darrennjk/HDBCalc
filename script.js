@@ -1,7 +1,6 @@
 const budgetInput = document.getElementById('budget');
 const form = document.getElementById('hdb-form');
 const flatType = document.getElementById('flatType');
-const ehg = document.getElementById('EHG-select');
 let total = 0;
 
 function handleFormSubmit(event) {
@@ -12,14 +11,16 @@ function handleFormSubmit(event) {
     const outerCostBreakdown = document.querySelector('.outer-cost-breakdown');
     outerCostBreakdown.style.display = 'grid';
 
+    // During Signing of Lease portion
     set_BSD(budget);
     set_conveyance(budget);
     set_leaseTotal();
-    return;
-    const leaseSum = updateLease(budget);
-    const keysSum = updateKeys(budget);
-    updateTotal(leaseSum, keysSum, ehg)
 
+    // During keys collection portion
+    set_survey();
+    set_fire();
+    set_keysTotal();
+    set_combined_total();
 }
 
 // Handles Nan or less than 0 budgets
@@ -51,95 +52,23 @@ function handleScheme(budget) {
     }
 }
 
-// // Updates 5% downpayment value
-// function update5Downpay(budget) {
-//     let downpay = (budget * 0.05);
-//     updateText('5downpay', downpay);
-//     return downpay;
-// }
-//
-// // Updates 20% downpayment value
-// function update20DownPay(budget) {
-//     let downpay = (budget * 0.20);
-//     updateText('20downpay', downpay);
-//     return downpay;
-// }
-
-
-// Updates survey fee value
-function updateSurvey() {
-    const tiers = [
-        { type: "1-room", fee: 163.5 },
-        { type: "2-room", fee: 163.5 },
-        { type: "3-room", fee: 231.6 },
-        { type: "4-room", fee: 299.75 },
-        { type: "5-room", fee: 354.25 },
-        { type: "Executive", fee: 408.75 },
-    ];
-
-    for (const tier of tiers) {
-        if (flatType.value == tier.type) {
-            updateText("survey", tier.fee);
-            return tier.fee;
-        }
-    }
-}
-
-// Updates fire insurance fee value
-function updateFire() {
-    const tiers = [
-        { type: "1-room", fee: 1.11 },
-        { type: "2-room", fee: 1.99 },
-        { type: "3-room", fee: 3.27 },
-        { type: "4-room", fee: 4.59 },
-        { type: "5-room", fee: 5.43 },
-        { type: "Executive", fee: 6.68 },
-    ];
-
-    for (const tier of tiers) {
-        if (flatType.value == tier.type) {
-            updateText("fireInsurance", tier.fee);
-            return tier.fee;
-        }
-    }
-}
-
-// Update cost for signing of lease
-function updateLease(budget) {
-    // downpay5 = update5Downpay(budget);
-    const leaseDownpayment = get_leaseDownpayment_value();
-    bsd = updateBSD(budget);
-    conveyance = updateConveyance(budget);
-    let leaseSum = downpay5 + bsd + conveyance;
-    updateText('leaseSum', leaseSum);
-    return leaseSum;
-}
-
-// Update cost/ during collection of keys
-function updateKeys(budget) {
-    survey = updateSurvey();
-    const leaseReg = document.getElementById('leaseReg');
-    const mortgageReg = document.getElementById('mortgageReg');
-    fire = updateFire();
-    downpay20 = update20DownPay(budget);
-
-    let keysSum = survey + parseFloat(leaseReg.textContent) + parseFloat(mortgageReg.textContent) + fire + downpay20
-    updateText('keysSum', keysSum);
-    return keysSum;
-}
 
 // Update total cost
-function updateTotal(leaseSum, keysSum, ehg) {
-    const total = leaseSum + keysSum;
-    updateText('totalCost', total);
+function set_combined_total() {
+    const leaseTotal = get_leaseTotal();
+    const keysTotal = get_keysTotal();
+    const ehg = get_ehg();
+    let combined_total = leaseTotal + keysTotal;
+
+    combined_total_element = document.querySelector('#combined_total');
+    combined_total_element.textContent = combined_total.toString();
 
     // Check if li arleady exists to prevent duplication
     let existing = document.getElementById("afterGrant");
     if (existing) { existing.remove() };
 
-    if (ehg.value && parseFloat(ehg.value) > 0) {
-        const grant = parseFloat(ehg.value);
-        const afterGrant = total - grant;
+    if (ehg && ehg > 0) {
+        const afterGrant = combined_total - ehg;
 
         // Create new list item
         let finalTotal = document.createElement("li");
@@ -151,10 +80,10 @@ function updateTotal(leaseSum, keysSum, ehg) {
             `;
 
         // Append to list
-        let cost = document.getElementById("totalList");
-        cost.appendChild(finalTotal);
+        let list_element = document.getElementById("totalList");
+        list_element.appendChild(finalTotal);
     }
-    return total;
+    return;
 }
 
 // Setters
@@ -251,6 +180,61 @@ function set_leaseTotal() {
     leaseTotal_element.textContent = total.toString();
 }
 
+// Updates survey fee value
+function set_survey() {
+    const tiers = [
+        { type: "1-room", fee: 163.5 },
+        { type: "2-room", fee: 163.5 },
+        { type: "3-room", fee: 231.6 },
+        { type: "4-room", fee: 299.75 },
+        { type: "5-room", fee: 354.25 },
+        { type: "Executive", fee: 408.75 },
+    ];
+
+    for (const tier of tiers) {
+        if (flatType.value == tier.type) {
+            survey_element = document.querySelector('.duringCollection #survey');
+            survey_element.textContent = tier.fee.toString();
+            return;
+        }
+    }
+}
+
+// Updates fire insurance fee value
+function set_fire() {
+    const tiers = [
+        { type: "1-room", fee: 1.11 },
+        { type: "2-room", fee: 1.99 },
+        { type: "3-room", fee: 3.27 },
+        { type: "4-room", fee: 4.59 },
+        { type: "5-room", fee: 5.43 },
+        { type: "Executive", fee: 6.68 },
+    ];
+
+    for (const tier of tiers) {
+        if (flatType.value == tier.type) {
+            fireInsurance_element = document.querySelector('.duringCollection #fireInsurance');
+            fireInsurance_element.textContent = tier.fee.toString();
+            return;
+        }
+    }
+}
+
+// Set total cost during collection of keys
+function set_keysTotal() {
+    const survey = get_survey();
+    const leaseReg = get_leaseReg();
+    const mortgageReg = get_mortgageReg();
+    const fire = get_fire();
+    const collectionDownpayment = get_keysDownpayment_value();
+    let total = survey + leaseReg + mortgageReg + fire + collectionDownpayment;
+
+    keysTotal_element = document.querySelector('.duringCollection #keysSum');
+    keysTotal_element.textContent = total.toString();
+    return;
+}
+
+// ALL GETTERS
 // Getters for scheme type
 function get_scheme() {
     const schemeType = document.getElementById("scheme-select");
@@ -278,9 +262,44 @@ function get_conveyance() {
     return parseFloat(conveyance.textContent);
 }
 
-// Helper function for updating HTML values
-function updateText(id, value) {
-    document.getElementById(id).textContent = value.toFixed(2);
+function get_survey() {
+    const survey = document.querySelector('.duringCollection #survey');
+    return parseFloat(survey.textContent);
+}
+
+function get_fire() {
+    const fire = document.querySelector('.duringCollection #fireInsurance');
+    return parseFloat(fire.textContent);
+}
+
+function get_leaseReg() {
+    const leaseReg = document.querySelector('.duringCollection #leaseReg');
+    return parseFloat(leaseReg.textContent);
+}
+
+function get_mortgageReg() {
+    const mortgageReg = document.querySelector('.duringCollection #mortgageReg');
+    return parseFloat(mortgageReg.textContent);
+}
+
+function get_leaseTotal() {
+    const leaseTotal = document.querySelector('.duringSigning #leaseSum');
+    return parseFloat(leaseTotal.textContent);
+}
+
+function get_keysTotal() {
+    const keysTotal = document.querySelector('.duringCollection #keysSum');
+    return parseFloat(keysTotal.textContent);
+}
+
+function get_ehg() {
+    const ehg = document.querySelector('#EHG-select');
+    return parseFloat(ehg.value);
+}
+
+function get_grant() {
+    const ehg = document.querySelector('#EHG-select');
+    return parseFloat(ehg.value);
 }
 
 form.addEventListener('submit', handleFormSubmit);

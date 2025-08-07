@@ -100,7 +100,7 @@ fieldset{
     margin-bottom: 1rem;
 }
 
-.totalCost{
+.combined_total{
     background: var(--boxBG);
     box-shadow: var(--shadow);
     padding: 1rem;
@@ -109,7 +109,7 @@ fieldset{
     grid-area: totalCost;
 }
 
-.totalCost ul li {
+.combined_total ul li {
     display: block;
     margin-bottom: 1rem;
     font-weight: bold;
