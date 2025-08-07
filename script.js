@@ -13,6 +13,8 @@ function handleFormSubmit(event) {
     outerCostBreakdown.style.display = 'grid';
 
     set_BSD(budget);
+    set_conveyance(budget);
+    set_leaseTotal();
     return;
     const leaseSum = updateLease(budget);
     const keysSum = updateKeys(budget);
@@ -49,47 +51,20 @@ function handleScheme(budget) {
     }
 }
 
-// Updates 5% downpayment value
-function update5Downpay(budget) {
-    let downpay = (budget * 0.05);
-    updateText('5downpay', downpay);
-    return downpay;
-}
+// // Updates 5% downpayment value
+// function update5Downpay(budget) {
+//     let downpay = (budget * 0.05);
+//     updateText('5downpay', downpay);
+//     return downpay;
+// }
+//
+// // Updates 20% downpayment value
+// function update20DownPay(budget) {
+//     let downpay = (budget * 0.20);
+//     updateText('20downpay', downpay);
+//     return downpay;
+// }
 
-// Updates 20% downpayment value
-function update20DownPay(budget) {
-    let downpay = (budget * 0.20);
-    updateText('20downpay', downpay);
-    return downpay;
-}
-
-
-// Updates conveyance fee value
-function updateConveyance(budget) {
-    let conveyance = 0;
-    let remaining = budget;
-
-    const tiers = [
-        { limit: 30000, rate: 0.90 },
-        { limit: 30000, rate: 0.72 },
-        { limit: Infinity, rate: 0.60 },
-    ];
-
-    // Adding up fees based on tiers 
-    for (const tier of tiers) {
-        const taxable = Math.min(tier.limit, remaining);
-        conveyance += (taxable / 1000) * tier.rate;
-        remaining -= taxable;
-        if (remaining <= 0) break;
-    }
-
-    conveyance = Math.ceil(conveyance); // Round up
-    conveyance = conveyance * 1.09; // Add 9% GST
-    if (conveyance < 21.60) { conveyance = 21.60 } // Set minimum coneyance fee
-
-    updateText("leaseConveyance", Math.round(conveyance));
-    return Math.round(conveyance);
-}
 
 // Updates survey fee value
 function updateSurvey() {
@@ -232,11 +207,48 @@ function set_BSD(budget) {
         if (remaining <= 0) break;
     }
     
-    console.log(budget);
-    console.log(bsd.toString());
     bsd_element = document.querySelector('.duringSigning #BSD');
     bsd_element.textContent = bsd.toString();
     return;
+}
+
+// Set conveyance fee value
+function set_conveyance(budget) {
+    let conveyance = 0;
+    let remaining = budget;
+
+    const tiers = [
+        { limit: 30000, rate: 0.90 },
+        { limit: 30000, rate: 0.72 },
+        { limit: Infinity, rate: 0.60 },
+    ];
+
+    // Adding up fees based on tiers 
+    for (const tier of tiers) {
+        const taxable = Math.min(tier.limit, remaining);
+        conveyance += (taxable / 1000) * tier.rate;
+        remaining -= taxable;
+        if (remaining <= 0) break;
+    }
+
+    conveyance = Math.ceil(conveyance); // Round up
+    conveyance = conveyance * 1.09; // Add 9% GST
+    conveyance = Math.round(conveyance);
+    if (conveyance < 21.60) { conveyance = 21.60 } // Set minimum coneyance fee
+
+    conveyance_element = document.querySelector('.duringSigning #leaseConveyance');
+    conveyance_element.textContent = conveyance.toString();
+    return;
+}
+
+function set_leaseTotal() {
+    const leaseDownpayment = get_leaseDownpayment_value();
+    const bsd = get_BSD();
+    const conveyance = get_conveyance();
+    let total = leaseDownpayment + bsd + conveyance;
+
+    leaseTotal_element = document.querySelector('.duringSigning #leaseSum');
+    leaseTotal_element.textContent = total.toString();
 }
 
 // Getters for scheme type
@@ -247,17 +259,23 @@ function get_scheme() {
 
 function get_leaseDownpayment_value() {
     const leaseDownpayment_value = document.querySelector('.duringSigning #leaseDownpayment_value');
-    return parseFloat(leaseDownpayment_value.value);
+    // console.log(leaseDownpayment_value.textContent);
+    return parseFloat(leaseDownpayment_value.textContent);
 }
 
 function get_keysDownpayment_value() {
     const keysDownpayment_value = document.querySelector('.duringCollection #keysDownpayment_value');
-    return parseFloat(keysDownpayment_value.value);
+    return parseFloat(keysDownpayment_value.textContent);
 }
 
 function get_BSD() {
     const bsd = document.querySelector('.duringSigning #BSD');
-    return parseFloat(bsd.value);
+    return parseFloat(bsd.textContent);
+}
+
+function get_conveyance() {
+    const conveyance = document.querySelector('.duringSigning #leaseConveyance');
+    return parseFloat(conveyance.textContent);
 }
 
 // Helper function for updating HTML values
