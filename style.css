@@ -75,6 +75,8 @@ fieldset{
     border: 2px solid var(--border);
     border-radius: 10px;
     grid-area: duringSigning;
+
+    place-items: center;
 }
 
 .duringSigning ul li {
@@ -82,6 +84,8 @@ fieldset{
     justify-content: space-between;
     max-width: 350px;
     margin-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .duringCollection{
@@ -91,6 +95,7 @@ fieldset{
     border: 2px solid var(--border);
     border-radius: 10px;
     grid-area: duringCollection;
+    place-items: center;
 }
 
 .duringCollection ul li {
@@ -98,6 +103,8 @@ fieldset{
     justify-content: space-between;
     max-width: 350px;
     margin-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .totalCost{
