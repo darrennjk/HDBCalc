@@ -82,10 +82,8 @@ fieldset{
 .duringSigning ul li {
     display: flex;
     justify-content: space-between;
-    max-width: 350px;
+    gap: 10rem;
     margin-bottom: 1rem;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .duringCollection{
@@ -101,10 +99,8 @@ fieldset{
 .duringCollection ul li {
     display: flex;
     justify-content: space-between;
-    max-width: 350px;
+    gap: 10rem;
     margin-bottom: 1rem;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .combined_total{
