@@ -34,10 +34,10 @@ function handleInvalidInput(budget) {
 // Handle scheme type
 function handleScheme(budget) {
     const types = [
-        { schemeType: "", lease: "5%", keys: "20%"}, // Default value
-        { schemeType: "staggered", lease: "5%", keys: "20%"},
-        { schemeType: "staggeredDiffered", lease: "2.5%", keys: "22.5%"},
-        { schemeType: "standard", lease: "10%", keys: "15%"},
+        { schemeType: "", lease: "5%", keys: "20%" }, // Default value
+        { schemeType: "staggered", lease: "5%", keys: "20%" },
+        { schemeType: "staggeredDiffered", lease: "2.5%", keys: "22.5%" },
+        { schemeType: "standard", lease: "10%", keys: "15%" },
     ];
 
     const current_scheme = get_scheme();
@@ -74,7 +74,7 @@ function set_combined_total() {
         let finalTotal = document.createElement("li");
         finalTotal.innerHTML = `
             <div id="afterGrant">
-                <div>Total cost after grant is:</div> 
+                <div>After Grant:</div> 
                 <div class="amount">$${afterGrant}</div>
             </div>
             `;
@@ -93,14 +93,14 @@ function set_leaseDownpayment(leasePercentage) {
 }
 
 function set_collectionDownpayment(keysPercentage) {
-    const leasePercent = document.querySelector('.duringCollection #keysPercent');
+    const keysPercent = document.querySelector('.duringCollection #keysPercent');
     keysPercent.textContent = keysPercentage;
 }
 
 function set_leaseDownpayment_value(budget_string, leaseValue_string) {
     const leaseValue = parseFloat(leaseValue_string);
     const budgetValue = parseFloat(budget_string);
-    let new_total = budgetValue * (leaseValue/100);
+    let new_total = budgetValue * (leaseValue / 100);
     new_total = new_total.toString();
     const leaseDownpayment_value = document.querySelector('.duringSigning #leaseDownpayment_value');
     leaseDownpayment_value.textContent = new_total;
@@ -110,7 +110,7 @@ function set_leaseDownpayment_value(budget_string, leaseValue_string) {
 function set_keysDownpayment_value(budget_string, keysValue_string) {
     const keysValue = parseFloat(keysValue_string);
     const budgetValue = parseFloat(budget_string);
-    let new_total = budgetValue * (keysValue/100);
+    let new_total = budgetValue * (keysValue / 100);
     new_total = new_total.toString();
     const keysDownpayment_value = document.querySelector('.duringCollection #keysDownpayment_value');
     keysDownpayment_value.textContent = new_total;
@@ -135,7 +135,7 @@ function set_BSD(budget) {
         remaining -= taxable;
         if (remaining <= 0) break;
     }
-    
+
     bsd_element = document.querySelector('.duringSigning #BSD');
     bsd_element.textContent = bsd.toString();
     return;
