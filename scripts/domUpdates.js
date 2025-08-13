@@ -1,3 +1,17 @@
+function setYearsSelection() {
+    const btoYearSelect = document.getElementById("completionYear");
+    const currentYear = new Date().getFullYear();
+    const maxYearsAhead = 5;
+
+    for (let year = currentYear; year <= currentYear + maxYearsAhead; year++) {
+        const option = document.createElement("option");
+        option.value = year;
+        option.textContent = year;
+        btoYearSelect.appendChild(option);
+    }
+
+}
+
 // Update total cost
 function set_combined_total() {
     const leaseTotal = get_leaseTotal();
