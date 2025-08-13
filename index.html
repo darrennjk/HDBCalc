@@ -5,6 +5,11 @@
 <head>
     <meta charset="utf-8" />
     <title>BTO Calculator</title>
+    <!-- <script src='script.js'></script> -->
+    <script src='scripts/main.js'></script>
+    <script src='scripts/domUpdates.js'></script>
+    <script src='scripts/formHandlers.js'></script>
+    <script src='scripts/schemeCalculations.js'></script>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
@@ -22,7 +27,7 @@
         <fieldset>
             <label for="scheme-select">Select your downpayment scheme:</label>
             <select name="scheme" id="scheme-select">
-                <option value="" disabled selected>Choose a scheme</option>
+                <option value="" disabled selected>--Choose a scheme--</option>
                 <option value="standard">Standard Downpayment Scheme</option>
                 <option value="staggered">Staggered Downpayment Scheme</option>
                 <option value="staggeredDiffered">Staggered Differed Downpayment Scheme</option>
@@ -30,7 +35,7 @@
             <br />
             <label for="EHG-select">Select your EHG grant:</label>
             <select name="EHG" id="EHG-select">
-                <option value="" disabled selected>Choose your grant</option>
+                <option value="" disabled selected>--Choose your grant--</option>
                 <option value="120000">$120,000</option>
                 <option value="110000">$110,000</option>
                 <option value="105000">$105,000</option>
@@ -52,7 +57,7 @@
             <br />
             <label for="flatType">Select your flat type:</label>
             <select name="flatType" id="flatType">
-                <option value="" disabled selected>Choose your flat type</option>
+                <option value="" disabled selected>--Choose your flat type--</option>
                 <option value="1-room">1-room</option>
                 <option value="2-room">2-room</option>
                 <option value="3-room">3-room</option>
@@ -61,6 +66,18 @@
                 <option value="Executive">Executive</option>
             </select>
             <br />
+            <label for="completionQuarter">Estimated Completion Quarter:</label>
+            <select id="completionQuarter" name="completionQuarter">
+                <option value="">--Select Year--</option>
+                <option value="Q1">--Q1 (Jan-Mar)--</option>
+                <option value="Q2">--Q2 (Apr-Jun)--</option>
+                <option value="Q3">--Q3 (Jul-Sep)--</option>
+                <option value="Q4">--Q4 (Oct-Dec)--</option>
+            </select>
+            <label for="completionYear">Year:</label>
+            <select id="completionYear" name="completionYear">
+                <option value="">--Select Year--</option>
+            </select>
             <button class="button" role="button" type="submit">Calculate!</button>
         </fieldset>
     </form>
@@ -144,7 +161,6 @@
 
         </section>
     </section>
-    <script src='script.js'></script>
 </body>
 
 </html>
