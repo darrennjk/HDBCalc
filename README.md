@@ -89,6 +89,7 @@ That's it — no installations or build tools required!
 
 - [x] Add sources to calculations
 - [ ] Add recommended savings per month for downpayment during keys collection
+- [ ] Include bank loans into calculations
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
